@@ -24,12 +24,72 @@
     box-sizing: border-box;
 }
 
-html {
+body {
+    margin: 0;
+    padding: 0;
     font-family: "Inter", sans-serif;
-    background: url("./img/background.png") top/contain no-repeat, #0f0f0f;
+    color: var(--color-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Section Backgrounds */
+/* Update the hero section styles */
+.hero-section {
+    background: url("./img/background.png") top/contain no-repeat;
     background-size: cover;
     background-position: center;
-    min-height: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Add gradient overlay */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(15, 15, 15, 0.3) 0%,
+        rgba(15, 15, 15, 0.7) 80%,
+        rgba(15, 15, 15, 0.95) 100%
+    );
+    pointer-events: none;
+}
+
+/* Update content section to match the gradient end */
+.content-section {
+    background-color: var(--color-main-bg);
+    position: relative;
+    padding: 50px 0;
+
+}
+
+/* Ensure content stays above gradient */
+.hero {
+    position: relative;
+    z-index: 1;
+}
+
+.bg-pattern::before {
+    opacity: 0.025;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 0;
+    content: '';
+    background-image: url(./img/texture.png);
+}
+
+.content-section > * {
+    position: relative;
+    z-index: 1;
 }
 
 a {
@@ -42,27 +102,20 @@ h1, h2, h3, h4, p {
     padding: 0;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    
-}
-
 main {
+    width: 60%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure main takes at least 100% of the viewport */
-    margin: 0 20%; /* Horizontal margins of 20% */
-    gap: 150px; /* Preserve 150px gap between sections */
+    gap: 150px;
 }
-
 
 /* Navigation */
 .navbar {
     display: flex;
     justify-content: center;
     width: 30%;
-    margin-top: var(--spacing-md);
+    margin: var(--spacing-md) auto 0;
 }
 
 .navbar ul {
@@ -109,7 +162,7 @@ main {
 
 /* Purchase form */
 .purchase-form {
-    margin-top: 300px;
+    margin-top: 50px;
 }
 
 .purchase-form__container {
@@ -180,6 +233,7 @@ main {
     padding-right: var(--spacing-xs);
 }
 
+/* Instructions */
 .instructions-form__title {
     font-size: 30px;
     margin-bottom: 30px;
@@ -204,6 +258,7 @@ main {
     margin: 0;
 }
 
+/* Servers Panel */
 .servers-panel-form__container {
     width: 50%;
     height: 80px;
@@ -264,6 +319,7 @@ main {
     z-index: 2; 
 }
 
+/* Utility Classes */
 .grey-colored {
     color: #5c5c5c;
 }
@@ -293,17 +349,90 @@ main {
     gap: 5px;
 }
 
+/* Footer */
 footer {
-    width: 100%;
-    height: 300px; /* Fixed height */
-    background-color: #0a0a0a; /* Dark background color */
-    display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
-    position: relative; /* Ensure it's positioned at the bottom */
-    margin-top: 100px;;
+    background-color: var(--color-footer);
+    padding: 50px 0;
+    margin-top: auto;
 }
 
 .footer-container {
-    text-align: center; /* Center content inside footer */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.footer-divider {
+    border: none;
+    color: #212121;
+    width: 100%;
+    border-top: 3.5px dashed #212121;
+}
+
+.top-part {
+    display: flex;
+    flex-direction: row;
+}
+
+.copyright-box {
+    display: flex;
+    width: 50%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.icon-part {
+    height: 40px;
+    width: 40px;
+}
+
+.near-icon-part {
+    font-size: 13px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.socials-block {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 50%;
+}
+
+.category-text {
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.link-text {
+    color: #f5b759;
+    text-shadow: 0 0 18px rgba(244, 183, 89, 0.9);
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.links-box {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+/* Social Icons Hover Effect */
+.socials-block i {
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.socials-block i:hover {
+    color: var(--color-accent);
 }
