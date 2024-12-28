@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>RaisinCloud</title>
     <link rel="stylesheet" href="./styles.css">
-    <link rel="icon" href="./img/logo.png">
+    <link rel="icon" href="./public/logo.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <header>
             <nav class="navbar">
                 <ul>
-                    <li><a href="#"><img src="./img/logo.png" alt="RaisinCloud Logo"></a></li>
+                    <li><a href="#"><img src="./public/logo.png" alt="RaisinCloud Logo"></a></li>
                     <li><a href="#rules">Правила</a></li>
                 </ul>
             </nav>
@@ -28,19 +28,61 @@
         <main>
             <section class="purchase-form">
                 <div class="purchase-form__containers">
-                    <h2 class="purchase-form__title">
-                        Введите <span class="highlight">никнейм</span> и <span class="highlight">email</span>,<br>
-                        чтобы приобрести товар
-                    </h2>
                     <form class="form">
-                        <div class="form__inputs">
-                            <input class="form__input" type="text" placeholder="Никнейм" required>
-                            <input class="form__input" type="email" placeholder="Ваш Email" required>
+                        <div class="form__left">
+                            <h2 class="purchase-form__title">
+                                Введите <span class="highlight">никнейм</span> и <span class="highlight">email</span>,<br>
+                                чтобы приобрести товар
+                            </h2>
+                            <div class="form__inputs">
+                                <input class="form__input" type="text" placeholder="Никнейм" required>
+                                <input class="form__input" type="email" placeholder="Ваш Email" required>
+                            </div>
+                            <div class="form__select-wrapper">
+                                <button class="form__select-button">
+                                    <img src="./public/product.png" width="35">
+                                    <p>Выберите товар</p>
+                                </button>
+                                <div class="form__select-dropdown">
+                                    <div class="product-section">
+                                        <div class="product-section__header">
+                                            <icon class="fas fa-tag"></icon>
+                                            <p>Привилегии</p>
+                                        </div>
+                                        <div class="product-section__list">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
-                        <div class="form__select-wrapper">
-                            <select class="form__select" required>
-                                <option value="Survival" selected>Выживание</option>
-                            </select>
+                        <div class="form__right">
+                            <div class="product-card">
+                                <div class="product-card__header">
+                                    <div>
+                                        <img src="./public/donate_candy.png" width="80">
+                                    </div>
+                                    <div class="product-card__header-info">
+                                        <div class="category-text">
+                                            <p><icon class="fas fa-tag"></icon> Привилегии</p>
+                                        </div>
+                                        <h2>Кенди</h2>
+                                        <p>19.00 ₽</p>
+                                    </div>
+                                </div>
+                                <div class="product-card__description">
+                                </div>
+                                <div class="product-card__footer">
+                                    <div class="product-card__promo-input">
+                                        <input class="form__input" placeholder="Введите промокод, если есть" type="text">
+                                    </div>
+                                    <div class="product-card__rules-tick">
+                                        <p><input type="checkbox"> Я принимаю условия пользовательского соглашения и оказания услуг</p>
+                                    </div>
+                                    <div class="product-card__button-box">
+                                        <button class="product-card__buy-button" type="submit"><i class="fas fa-shopping-cart"></i> Купить за 19.00 ₽</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -110,7 +152,7 @@
             <div class="top-part">
                 <div class="copyright-box">
                     <div class="icon-part">
-                        <a href="#"><img width="40" src="./img/logo.png" alt="RaisinCloud Logo"></a>
+                        <a href="#"><img width="40" src="./public/logo.png" alt="RaisinCloud Logo"></a>
                     </div>
                     <div class="near-icon-part">
                         <p class="white-colored">© 2021 - 2024 RaisinCloud. <br>Все права <span class="accent-colored">защищены</span>.</p>
@@ -133,5 +175,7 @@
             </div>
         </div>
     </footer>
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/database.js"></script>
 </body>
 </html>

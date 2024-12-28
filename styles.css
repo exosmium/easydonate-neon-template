@@ -35,16 +35,14 @@ body {
 }
 
 /* Section Backgrounds */
-/* Update the hero section styles */
 .hero-section {
-    background: url("./img/background.png") top/contain no-repeat;
+    background: url("./public/background.png") top/contain no-repeat;
     background-size: cover;
     background-position: center;
     min-height: 100vh;
     position: relative;
 }
 
-/* Add gradient overlay */
 .hero-section::before {
     content: '';
     position: absolute;
@@ -61,15 +59,12 @@ body {
     pointer-events: none;
 }
 
-/* Update content section to match the gradient end */
 .content-section {
     background-color: var(--color-main-bg);
     position: relative;
     padding: 50px 0;
-
 }
 
-/* Ensure content stays above gradient */
 .hero {
     position: relative;
     z-index: 1;
@@ -84,7 +79,7 @@ body {
     position: absolute;
     z-index: 0;
     content: '';
-    background-image: url(./img/texture.png);
+    background-image: url(./public/texture.png);
 }
 
 .content-section > * {
@@ -107,7 +102,7 @@ main {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 150px;
+    gap: 200px;
 }
 
 /* Navigation */
@@ -163,19 +158,22 @@ main {
 /* Purchase form */
 .purchase-form {
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
-.purchase-form__container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    width: 600px;
+.purchase-form__containers {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .purchase-form__title {
     color: var(--color-white);
     font-size: var(--font-size-xl);
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .highlight {
@@ -185,19 +183,104 @@ main {
 /* Form elements */
 .form {
     display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.form__left, 
+.form__right {
+    flex: 1;
+    max-width: 600px;
+    display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 50%;
 }
 
 .form__inputs {
     display: flex;
-    flex-direction: row;
-    gap: 30px;
+    gap: 15px;
+    width: 100%;
 }
 
-.form__input,
-.form__select {
+.product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    background-color: #0a0a0a;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.product-card__header {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.product-card__header-info .category-text {
+    color: #727272;
+    text-transform: uppercase;
+}
+
+.product-card__header-info p {
+    font-weight: 500;
+}
+
+.product-card__buy-button {
+    width: 100%;
+    height: 60px;
+    text-align: left;
+    border-radius: 5px;
+    background-color: #f5b759;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0px 10px 100px rgba(244, 183, 89, 0.3);
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.product-card__promo-input,
+.product-card__button-box {
+    width: 100%;
+}
+
+.fa-shopping-cart {
+    padding-top: 4px;
+}
+
+.product-card__description {
+    max-height: 250px;
+    overflow: auto;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.product-card__description::-webkit-scrollbar {
+    display: none;
+  }
+
+.product-card__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    width: 100%;
+}
+
+
+.form__input {
     font-size: var(--font-size-base);
     background: transparent;
     border: 1px solid var(--color-border);
@@ -210,27 +293,39 @@ main {
 }
 
 .form__select-wrapper {
-    position: relative;
     width: 100%;
 }
 
-.form__select-wrapper::after {
-    content: "Сервер: ";
-    position: absolute;
-    left: var(--spacing-sm);
-    top: 50%;
-    transform: translateY(-50%);
+.form__select-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
     color: var(--color-white);
-    font-weight: 550;
-    pointer-events: none;
+    padding: 0 var(--spacing-sm);
+    height: 60px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.form__select {
-    color: var(--color-accent);
-    font-weight: 550;
-    padding-left: 80px;
-    padding-top: 1px;
-    padding-right: var(--spacing-xs);
+.form__select-dropdown {
+    display: none;
+    margin-top: 5px;
+    height: 280px;
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 3px;
+    background-color: rgb(23, 23, 23);
+    padding: 25px 0;
+    overflow-y: auto;
 }
 
 /* Instructions */
@@ -256,6 +351,59 @@ main {
 
 .instructions__item-description {
     margin: 0;
+}
+
+/* Product Sections */
+.product-section {
+    margin-bottom: 30px;
+    padding: 0 25px 30px 25px;
+    border-bottom: 2.5px dashed #4e4e4e;
+}
+
+.product-section:last-child {
+    border: none;
+    margin: 0;
+    padding: 0 25px;
+}
+
+.product-section__header {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.product-section__list {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-section__entry {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    cursor: pointer;
+    padding: 15px 0;
+    transition: 0.3s;
+}
+
+.product-section__entry:hover {
+    margin-left: 10px;
+}
+
+.product-section__entry:last-child {
+    padding: 15px 0 0 0;
+}
+
+.product-section__paragraph {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-section__entry p {
+    padding-top: 3px;
 }
 
 /* Servers Panel */
@@ -293,7 +441,7 @@ main {
 }
 
 .servers-panel__number-box {
-    position: relative; 
+    position: relative;
     height: 40px;
     width: 40px;
     border-radius: 2px;
@@ -316,7 +464,21 @@ main {
     height: 100%;
     align-items: center;
     justify-content: center;
-    z-index: 2; 
+    z-index: 2;
+}
+
+/* Custom scrollbar */
+.form__select-dropdown::-webkit-scrollbar {
+    width: 3px;
+}
+
+.form__select-dropdown::-webkit-scrollbar-thumb {
+    background-color: rgba(189, 131, 44, 0.9);
+}
+
+.form__select-dropdown::-webkit-scrollbar-track {
+    background-color: rgb(23, 23, 23);
+    border-radius: 10px;
 }
 
 /* Utility Classes */
