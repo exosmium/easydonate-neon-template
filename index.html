@@ -35,18 +35,23 @@
                                 чтобы приобрести товар
                             </h2>
                             <div class="form__inputs">
-                                <input class="form__input" type="text" placeholder="Никнейм" required>
-                                <input class="form__input" type="email" placeholder="Ваш Email" required>
+                                <input class="form__input username-input" type="text" placeholder="Никнейм" required>
+                                <input class="form__input email-input" type="email" placeholder="Ваш Email" required>
                             </div>
-                            <div class="form__select-wrapper">
-                                <button class="form__select-button">
+                            <div class="form__select-wrapper server-select">
+                                <button class="form__select-button server-button">
+                                    <p>Сервер: <span class="accent-colored">Выживание</span></p>
+                                </button>
+                            </div>
+                            <div class="form__select-wrapper product-select">
+                                <button class="form__select-button product-button" disabled>
                                     <img src="./public/product.png" width="35">
                                     <p>Выберите товар</p>
                                 </button>
                                 <div class="form__select-dropdown">
                                     <div class="product-section">
                                         <div class="product-section__header">
-                                            <icon class="fas fa-tag"></icon>
+                                            <i class="fas fa-tag"></i>
                                             <p>Привилегии</p>
                                         </div>
                                         <div class="product-section__list">
@@ -62,11 +67,6 @@
                                         <img src="./public/donate_candy.png" width="80">
                                     </div>
                                     <div class="product-card__header-info">
-                                        <div class="category-text">
-                                            <p><icon class="fas fa-tag"></icon> Привилегии</p>
-                                        </div>
-                                        <h2>Кенди</h2>
-                                        <p>19.00 ₽</p>
                                     </div>
                                 </div>
                                 <div class="product-card__description">
@@ -76,7 +76,7 @@
                                         <input class="form__input" placeholder="Введите промокод, если есть" type="text">
                                     </div>
                                     <div class="product-card__rules-tick">
-                                        <p><input type="checkbox"> Я принимаю условия пользовательского соглашения и оказания услуг</p>
+                                        <p><input type="checkbox" required> Я принимаю условия пользовательского соглашения и оказания услуг</p>
                                     </div>
                                     <div class="product-card__button-box">
                                         <button class="product-card__buy-button" type="submit"><i class="fas fa-shopping-cart"></i> Купить за 19.00 ₽</button>
@@ -175,6 +175,18 @@
             </div>
         </div>
     </footer>
+
+    <div id="paymentPopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+        <div style="background: #0a0a0a; border-radius: 15px; padding: 30px; width: 90%; max-width: 500px; text-align: center;">
+            <h2 class="shadowed-text" style="margin-bottom: 20px;">Автоматические платежи отключены</h2>
+            <p style="color: #727272; margin-bottom: 20px;">Для покупки товара, пожалуйста, свяжитесь с администратором в Telegram:</p>
+            <a href="https://t.me/exosmium" target="_blank" style="display: inline-block; background-color: #f5b759; color: white; padding: 15px 30px; border-radius: 5px; font-weight: 600; box-shadow: 0px 10px 100px rgba(244, 183, 89, 0.3); margin-bottom: 20px; transition: background-color 0.3s ease;">
+                <i class="fab fa-telegram"></i> exosmium
+            </a>
+            <button id="closePopup" style="background: transparent; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 10px 20px; border-radius: 3px; cursor: pointer; width: 100%;">Закрыть</button>
+        </div>
+    </div>
+
     <script type="module" src="./js/index.js"></script>
     <script type="module" src="./js/database.js"></script>
 </body>
