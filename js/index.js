@@ -1,5 +1,6 @@
 import products from "./database.js";
 
+// DOM Elements
 const formDropdown = document.querySelector(".form__select-dropdown");
 const productCard = document.querySelector(".product-card");
 const productCardHeaderInfo = productCard.querySelector(".product-card__header-info");
@@ -7,53 +8,45 @@ const productCardDescription = productCard.querySelector(".product-card__descrip
 const productCardBuyButton = productCard.querySelector(".product-card__buy-button");
 const productCardImage = productCard.querySelector(".product-card__header img");
 const productButton = document.querySelector(".product-button");
+const serverButton = document.querySelector(".server-button");
 const usernameInput = document.querySelector(".username-input");
 const emailInput = document.querySelector(".email-input");
-
-// Function to check if form inputs are filled
-const checkFormInputs = () => {
-    const username = usernameInput.value.trim();
-    const email = emailInput.value.trim();
-    
-    if (username && email) {
-        productButton.disabled = false;
-        productButton.style.opacity = "1";
-    } else {
-        productButton.disabled = true;
-        productButton.style.opacity = "0.5";
-    }
-};
-
 const paymentPopup = document.getElementById("paymentPopup");
 const closePopupButton = document.getElementById("closePopup");
 
-productButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    toggleDropdown();
-});
+// State Management
+let productDropdownState = false;
+let serverDropdownState = false;
 
-// Handle buy button click
-productCardBuyButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    paymentPopup.style.display = "flex";
-});
-
-// Close popup when close button is clicked
-closePopupButton.addEventListener("click", () => {
-    paymentPopup.style.display = "none";
-});
-
-// Close popup when clicking outside
-paymentPopup.addEventListener("click", (e) => {
-    if (e.target === paymentPopup) {
-        paymentPopup.style.display = "none";
+// Function to check if username input is filled
+const checkFormInputs = () => {
+    const username = usernameInput.value.trim();
+    const productSelectWrapper = document.querySelector('.product-select');
+    
+    if (username) {
+        // Show product selector
+        productButton.disabled = false;
+        productSelectWrapper.style.display = 'block';
+        productSelectWrapper.style.opacity = '1';
+        productSelectWrapper.style.transform = 'translateY(0)';
+        
+        // Show product card
+        productCard.style.display = 'flex';
+        productCard.style.opacity = '1';
+        productCard.style.transform = 'translateY(0)';
+    } else {
+        // Hide product selector
+        productButton.disabled = true;
+        productSelectWrapper.style.display = 'none';
+        productSelectWrapper.style.opacity = '0';
+        productSelectWrapper.style.transform = 'translateY(-10px)';
+        
+        // Hide product card
+        productCard.style.display = 'none';
+        productCard.style.opacity = '0';
+        productCard.style.transform = 'translateY(-10px)';
     }
-});
-
-
-// Add input event listeners
-usernameInput.addEventListener("input", checkFormInputs);
-emailInput.addEventListener("input", checkFormInputs);
+};
 
 // Function to update the product card
 const updateProductCard = (product) => {
@@ -103,6 +96,13 @@ const loadProducts = () => {
         return acc;
     }, {});
 
+    // Find the Кенди product
+    let defaultProduct = null;
+    for (const categoryProducts of Object.values(categorizedProducts)) {
+        defaultProduct = categoryProducts.find(product => product.name === "Кенди");
+        if (defaultProduct) break;
+    }
+
     Object.entries(categorizedProducts).forEach(([category, categoryProducts]) => {
         const productSection = document.createElement("div");
         productSection.classList.add("product-section");
@@ -122,12 +122,12 @@ const loadProducts = () => {
         const productList = document.createElement("div");
         productList.classList.add("product-section__list");
 
-        categoryProducts.forEach((product, index) => {
+        categoryProducts.forEach((product) => {
             const productEntry = document.createElement("div");
             productEntry.classList.add("product-section__entry");
             
-            // Select first product by default
-            if (index === 0) {
+            // Select Кенди by default
+            if (product.name === "Кенди") {
                 productEntry.classList.add("selected");
                 updateProductCard(product);
             }
@@ -143,7 +143,7 @@ const loadProducts = () => {
 
             productEntry.addEventListener("click", () => {
                 updateProductCard(product);
-                toggleDropdown();
+                toggleProductDropdown();
 
                 // Highlight the selected product
                 document.querySelectorAll(".product-section__entry").forEach((entry) => {
@@ -161,21 +161,121 @@ const loadProducts = () => {
         productSection.appendChild(productList);
         formDropdown.appendChild(productSection);
     });
-};
 
-// Initialize product dropdown
-loadProducts();
-
-// Toggle dropdown visibility
-const toggleDropdown = () => {
-    if (!productButton.disabled) {
-        dropdownState = !dropdownState;
-        formDropdown.style.display = dropdownState ? "block" : "none";
+    // If we found the Кенди product, make sure it's selected
+    if (defaultProduct) {
+        updateProductCard(defaultProduct);
     }
 };
 
-let dropdownState = false;
-productButton.addEventListener("click", (e) => {
+// Toggle product dropdown visibility
+const toggleProductDropdown = (e) => {
+    if (e) e.preventDefault();
+    if (!productButton.disabled) {
+        productDropdownState = !productDropdownState;
+        formDropdown.style.display = productDropdownState ? "block" : "none";
+        
+        // Close server dropdown if open
+        if (serverDropdownState) {
+            serverDropdownState = false;
+            if (document.querySelector(".server-select .form__select-dropdown")) {
+                document.querySelector(".server-select .form__select-dropdown").style.display = "none";
+            }
+        }
+    }
+};
+
+// Toggle server dropdown visibility
+const toggleServerDropdown = (e) => {
+    if (e) e.preventDefault();
+    serverDropdownState = !serverDropdownState;
+    if (document.querySelector(".server-select .form__select-dropdown")) {
+        document.querySelector(".server-select .form__select-dropdown").style.display = 
+            serverDropdownState ? "block" : "none";
+    }
+    
+    // Close product dropdown if open
+    if (productDropdownState) {
+        productDropdownState = false;
+        formDropdown.style.display = "none";
+    }
+};
+
+// Function to update player count
+const updatePlayerCount = async () => {
+    try {
+        const response = await fetch('https://eu.mc-api.net/v3/server/ping/mc.raisincloud.ru');
+        const data = await response.json();
+        
+        if (data && data.online && data.players) {
+            const onlineSpan = document.querySelector('.servers-panel__server-online .accent-colored');
+            if (onlineSpan) {
+                onlineSpan.textContent = `${data.players.online} из ${data.players.max}`;
+            }
+        }
+    } catch (error) {
+        console.error('Failed to fetch server status:', error);
+    }
+};
+
+// Function to start server status updates
+const startServerStatusUpdates = () => {
+    updatePlayerCount();
+    setInterval(updatePlayerCount, 30000);
+};
+
+// Event Listeners
+productButton.addEventListener("click", toggleProductDropdown);
+serverButton.addEventListener("click", toggleServerDropdown);
+
+// Handle buy button click
+productCardBuyButton.addEventListener("click", (e) => {
     e.preventDefault();
-    toggleDropdown();
+    paymentPopup.style.display = "flex";
+});
+
+// Close popup when close button is clicked
+closePopupButton.addEventListener("click", () => {
+    paymentPopup.style.display = "none";
+});
+
+// Close popup when clicking outside
+paymentPopup.addEventListener("click", (e) => {
+    if (e.target === paymentPopup) {
+        paymentPopup.style.display = "none";
+    }
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener("click", (e) => {
+    if (!e.target.closest(".form__select-wrapper")) {
+        formDropdown.style.display = "none";
+        if (document.querySelector(".server-select .form__select-dropdown")) {
+            document.querySelector(".server-select .form__select-dropdown").style.display = "none";
+        }
+        productDropdownState = false;
+        serverDropdownState = false;
+    }
+});
+
+// Form input event listeners
+usernameInput.addEventListener("input", checkFormInputs);
+emailInput.addEventListener("input", checkFormInputs);
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    loadProducts();
+    startServerStatusUpdates();
+    
+    // Initial form state
+    checkFormInputs();
+    
+    // Clear input fields on page load
+    usernameInput.value = '';
+    emailInput.value = '';
+    
+    // Initially hide product card
+    productCard.style.display = 'none';
+    productCard.style.opacity = '0';
+    productCard.style.transform = 'translateY(-10px)';
 });

@@ -41,6 +41,7 @@ body {
     background-position: center;
     min-height: 100vh;
     position: relative;
+    z-index: 2;
 }
 
 .hero-section::before {
@@ -52,9 +53,9 @@ body {
     bottom: 0;
     background: linear-gradient(
         to bottom,
-        rgba(15, 15, 15, 0.3) 0%,
-        rgba(15, 15, 15, 0.7) 80%,
-        rgba(15, 15, 15, 0.95) 100%
+        rgba(15, 15, 15, 0.6) 0%,
+        rgba(15, 15, 15, 0.8) 40%,
+        rgba(15, 15, 15, 0.99) 100%
     );
     pointer-events: none;
 }
@@ -66,12 +67,26 @@ body {
 }
 
 .hero {
-    position: relative;
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: var(--spacing-xl);
+    animation: slideIn 1s ease-out forwards;
+    opacity: 0;
 }
 
-.bg-pattern::before {
-    opacity: 0.025;
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.gradient-pattern::before {
     top: 0;
     left: 0;
     bottom: 0;
@@ -79,7 +94,12 @@ body {
     position: absolute;
     z-index: 0;
     content: '';
-    background-image: url(./public/texture.png);
+    background: linear-gradient(
+        to bottom,
+        rgba(15, 15, 15, 0.99) 100%,
+        rgba(15, 15, 15, 0.8) 80%,
+        rgba(15, 15, 15, 0.9) 0%
+    ), url(./public/texture.png);
 }
 
 .content-section > * {
@@ -108,9 +128,11 @@ main {
 /* Navigation */
 .navbar {
     display: flex;
-    justify-content: center;
-    width: 30%;
+    justify-content: left;
+    width: 50%;
+    font-weight: 500;
     margin: var(--spacing-md) auto 0;
+    z-index: 2;
 }
 
 .navbar ul {
@@ -119,6 +141,7 @@ main {
     margin: 0;
     padding: 0;
     list-style: none;
+    z-index: 2;
 }
 
 .navbar li {
@@ -157,10 +180,11 @@ main {
 
 /* Purchase form */
 .purchase-form {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
     width: 100%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .purchase-form__containers {
@@ -244,9 +268,33 @@ main {
 }
 
 .server-button {
-    cursor: default;
-    pointer-events: none;
+    cursor: pointer;
     font-weight: 700;
+}
+
+/* Add styles for server dropdown */
+.server-select .form__select-dropdown {
+    display: none;
+    margin-top: 5px;
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 3px;
+    background-color: rgb(23, 23, 23);
+    padding: 25px;
+}
+
+/* Product selector visibility styles */
+.product-select {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.form__select-wrapper {
+    margin-top: 15px;
 }
 
 .form__select-dropdown {
@@ -652,4 +700,61 @@ footer {
 .product-card__rules-tick input[type="checkbox"] {
     margin-right: 8px;
     cursor: pointer;
+}
+
+#paymentPopup {
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: 
+    rgba(0,0,0,0.8); 
+    z-index: 1000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    display: none;
+}
+
+#paymentPopupContainer {
+    background: #0a0a0a; 
+    border-radius: 15px; 
+    padding: 30px; 
+    width: 90%; 
+    max-width: 500px; 
+    text-align: center;
+}
+
+#paymentPopupContainer h2 {
+    margin-bottom: 20px;
+}
+
+
+#paymentPopupContainer p {
+    color: #727272; 
+    margin-bottom: 20px;
+}
+
+.telegram-link {
+    display: inline-block;
+    background-color: #f5b759;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    box-shadow: 0px 10px 100px rgba(244, 183, 89, 0.3);
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#closePopup {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
 }

@@ -18,15 +18,15 @@
             </nav>
         </header>
 
-        <section class="hero overlay">
+        <section class="hero">
             <h1 class="hero__title shadowed-text">RaisinCloud</h1>
             <p class="hero__subtitle">Осторожно, оторваться от игры у нас будет сложно...</p>
         </section>
     </div>
 
-    <div class="content-section bg-pattern">
+    <div class="content-section gradient-pattern ">
         <main>
-            <section class="purchase-form">
+            <section class="purchase-form extra-container">
                 <div class="purchase-form__containers">
                     <form class="form">
                         <div class="form__left">
@@ -88,7 +88,7 @@
                 </div>
             </section>
 
-            <section class="servers-panel">
+            <section class="servers-panel extra-container">
                 <div class="servers-panel-form__container">
                     <div class="servers-panel__number-block">
                         <div class="servers-panel__number-box">
@@ -115,7 +115,7 @@
                                 <span class="grey-colored">
                                     <i class="fas fa-users"></i>
                                     <span class="accent-colored">
-                                        1 из 30
+                                        ? из 30
                                     </span>
                                     игроков онлайн
                                 </span>
@@ -176,14 +176,14 @@
         </div>
     </footer>
 
-    <div id="paymentPopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: flex; align-items: center; justify-content: center;">
-        <div style="background: #0a0a0a; border-radius: 15px; padding: 30px; width: 90%; max-width: 500px; text-align: center;">
-            <h2 class="shadowed-text" style="margin-bottom: 20px;">Автоматические платежи отключены</h2>
-            <p style="color: #727272; margin-bottom: 20px;">Для покупки товара, пожалуйста, свяжитесь с администратором в Telegram:</p>
-            <a href="https://t.me/exosmium" target="_blank" style="display: inline-block; background-color: #f5b759; color: white; padding: 15px 30px; border-radius: 5px; font-weight: 600; box-shadow: 0px 10px 100px rgba(244, 183, 89, 0.3); margin-bottom: 20px; transition: background-color 0.3s ease;">
+    <div id="paymentPopup">
+        <div id="paymentPopupContainer">
+            <h2 class="shadowed-text">Автоматические платежи отключены</h2>
+            <p>Для покупки товара, пожалуйста, свяжитесь с администратором в Telegram:</p>
+            <a href="https://t.me/exosmium" target="_blank" class="telegram-link">
                 <i class="fab fa-telegram"></i> exosmium
             </a>
-            <button id="closePopup" style="background: transparent; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 10px 20px; border-radius: 3px; cursor: pointer; width: 100%;">Закрыть</button>
+            <button id="closePopup">Закрыть</button>
         </div>
     </div>
 
