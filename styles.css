@@ -987,46 +987,51 @@ footer {
     }
 }
 
-/* Rules Section Specific Styles */
+/* Rules Section */
 .rules-section {
+    max-width: 1920px;
     width: 100%;
+    padding: 20px;
     margin: 0 auto;
-    padding: 50px 0;
 }
 
 .rules-container {
+    background-color: var(--color-main-bg);
+    width: 100%;
+    max-width: 1200px;
     border-radius: 15px;
-    padding: 40px;
+    padding: 20px;
+    margin: 0 auto;
     position: relative;
 }
 
 .rules-content {
-    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
 }
 
 /* Section Headers */
-.rules__main-section {
-    margin-bottom: 48px;
+.rules__section {
+    margin-bottom: 40px;
+}
+
+.rules__section:last-child {
+    margin-bottom: 0;
 }
 
 .rules__section-title {
     color: var(--color-accent);
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 800;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     text-shadow: 5px 5px 20px var(--color-accent);
-}
-
-.rules__section-content {
-    margin-bottom: 32px;
 }
 
 /* Subsections */
 .rules__subsection {
-    margin-bottom: 32px;
+    margin-bottom: 25px;
+    padding-left: 15px;
     border-left: 2px solid rgba(244, 183, 89, 0.2);
-    padding-left: 24px;
 }
 
 .rules__subsection:last-child {
@@ -1034,48 +1039,47 @@ footer {
 }
 
 .rules__subsection-title {
-    font-size: 22px;
-    font-weight: 600;
     color: var(--color-white);
-    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 
 .rules__subsection-content {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
 
-/* Bullet Points */
+/* Content Elements */
 .rules__bullet {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: flex-start;
 }
 
 .bullet-marker {
     color: var(--color-accent);
-    font-size: 18px;
-    line-height: 1.2;
+    flex-shrink: 0;
 }
 
 .bullet-text {
-    color: rgba(255, 255, 255, 0.8);
+    color: #ccc;
     line-height: 1.5;
+    flex: 1;
 }
 
-/* Regular Text */
 .rules__text {
-    color: rgba(255, 255, 255, 0.8);
+    color: #ccc;
     line-height: 1.5;
 }
 
 /* Notes and Exceptions */
 .rules__note {
     background-color: rgba(244, 183, 89, 0.07);
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
-    margin: 16px 0;
+    margin: 10px 0;
 }
 
 .note-title {
@@ -1086,7 +1090,7 @@ footer {
 }
 
 .note-text {
-    color: rgba(255, 255, 255, 0.6);
+    color: #888;
     line-height: 1.5;
 }
 
@@ -1099,65 +1103,85 @@ footer {
     border-radius: 8px;
 }
 
-/* Mobile Responsiveness */
-@media screen and (max-width: 1200px) {
+/* Responsive Design */
+@media screen and (min-width: 768px) {
     .rules-section {
-        width: 80%;
+        padding: 30px;
     }
-}
-
-@media screen and (max-width: 768px) {
-    .rules-section {
-        width: 90%;
-        padding: 30px 0;
-    }
-
+    
     .rules-container {
-        padding: 20px;
+        padding: 30px;
     }
 
     .rules__section-title {
-        font-size: 24px;
-    }
-
-    .rules__subsection-title {
-        font-size: 20px;
+        font-size: 26px;
+        margin-bottom: 25px;
     }
 
     .rules__subsection {
-        padding-left: 16px;
+        padding-left: 20px;
+        margin-bottom: 30px;
+    }
+
+    .rules__subsection-title {
+        font-size: 22px;
+        margin-bottom: 20px;
     }
 
     .rules__note {
-        padding: 16px;
+        padding: 20px;
+        margin: 15px 0;
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 1024px) {
     .rules-section {
-        width: 95%;
-        padding: 20px 0;
+        padding: 40px;
     }
 
     .rules-container {
-        padding: 15px;
+        padding: 40px;
     }
 
     .rules__section-title {
-        font-size: 22px;
-    }
-
-    .rules__subsection-title {
-        font-size: 18px;
+        font-size: 28px;
+        margin-bottom: 30px;
     }
 
     .rules__subsection {
-        padding-left: 12px;
+        padding-left: 25px;
+        margin-bottom: 35px;
     }
 
-    .bullet-text, 
-    .rules__text, 
-    .note-text {
-        font-size: 14px;
+    .rules__bullet {
+        gap: 12px;
     }
+
+    .rules__note {
+        padding: 25px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .rules-section {
+        padding: 50px 0;
+    }
+
+    .rules__section-title {
+        font-size: 30px;
+    }
+
+    .rules__subsection {
+        padding-left: 30px;
+    }
+
+    .rules__subsection-title {
+        font-size: 24px;
+    }
+}
+
+/* Text Selection */
+.rules-content ::selection {
+    background: rgba(244, 183, 89, 0.3);
+    color: var(--color-white);
 }
