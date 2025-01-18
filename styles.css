@@ -166,9 +166,10 @@ main {
 
 .shadowed-text {
     color: var(--color-accent);
-    font-weight: 800;
-    margin: 0;
+    font-weight: 800 !important;
     text-shadow: 5px 5px 20px var(--color-accent);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .hero__subtitle {
