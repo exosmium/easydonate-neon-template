@@ -122,7 +122,7 @@ main {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 200px;
+    gap: 150px;
 }
 
 /* Navigation */
@@ -218,7 +218,7 @@ main {
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+
 }
 
 .form__inputs {
@@ -757,4 +757,231 @@ footer {
     border-radius: 3px;
     cursor: pointer;
     width: 100%;
+}
+
+/* Add these media queries at the end of styles.css */
+
+/* Large screens (less than 1200px) */
+@media screen and (max-width: 1200px) {
+    main {
+        width: 80%;
+    }
+
+    .footer-container {
+        width: 80%;
+    }
+
+    .navbar {
+        width: 80%;
+    }
+
+    .form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form__left, 
+    .form__right {
+        width: 100%;
+        max-width: none;
+    }
+
+    .servers-panel-form__container {
+        width: 70%;
+    }
+    
+    .servers-panel__number-box {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .servers-panel__number h2 {
+        font-size: 24px;
+    }
+}
+
+/* Medium screens (less than 768px) */
+@media screen and (max-width: 768px) {
+    main {
+        width: 90%;
+        gap: 100px;
+    }
+
+    .footer-container {
+        width: 90%;
+    }
+
+    .navbar {
+        width: 90%;
+    }
+
+    .hero__title {
+        font-size: calc(var(--font-size-xxl) * 0.7);
+    }
+
+    .hero__subtitle {
+        font-size: calc(var(--font-size-lg) * 0.8);
+        text-align: center;
+    }
+
+    .purchase-form__title {
+        font-size: calc(var(--font-size-xl) * 0.8);
+    }
+
+    .form__inputs {
+        flex-direction: column;
+    }
+
+    .product-card {
+        padding: 15px;
+    }
+
+    .servers-panel-form__container {
+        width: 100%;
+        transform: skewX(-5deg);
+    }
+
+    .top-part {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .copyright-box,
+    .socials-block {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .near-icon-part {
+        text-align: center;
+    }
+}
+
+/* Small screens (less than 480px) */
+@media screen and (max-width: 480px) {
+    .hero__title {
+        font-size: calc(var(--font-size-xxl) * 0.5);
+    }
+
+    .hero__subtitle {
+        font-size: calc(var(--font-size-lg) * 0.7);
+        padding: 0 20px;
+    }
+
+    .purchase-form__title {
+        font-size: calc(var(--font-size-xl) * 0.6);
+    }
+
+    .form__select-button {
+        font-size: calc(var(--font-size-base) * 0.9);
+    }
+
+    .product-card__header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .product-card__rules-tick {
+        text-align: center;
+    }
+
+    .servers-panel__server-name h2 {
+        font-size: 20px;
+    }
+    
+    .servers-panel__number-block {
+        width: 50px;
+    }
+    
+    .servers-panel-form__container {
+        height: 70px;
+        padding: 10px;
+    }
+    
+    .right-part {
+        gap: 0;
+    }
+    
+    .servers-panel__server-name {
+        margin-bottom: 2px;
+    }
+
+    .tiny-blocks-grid {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 5px;
+    }
+    
+    .tiny-block {
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+    #paymentPopupContainer {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .telegram-link {
+        padding: 12px 20px;
+    }
+}
+
+/* Fix dropdown positioning on mobile */
+@media screen and (max-width: 768px) {
+    .form__select-dropdown {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-height: 80vh;
+        z-index: 1000;
+    }
+}
+
+/* Add touch-friendly improvements */
+@media (hover: none) {
+    .product-section__entry:hover {
+        margin-left: 0;
+    }
+
+    .form__select-button,
+    .product-card__buy-button,
+    .product-section__entry {
+        padding: 15px;
+    }
+}
+
+/* Improve scrolling on mobile */
+@media (max-width: 768px) {
+    .form__select-dropdown {
+        -webkit-overflow-scrolling: touch;
+        overflow-y: auto;
+    }
+
+    .copyright-box,
+    .socials-block {
+        width: 100%;
+        justify-content: flex-start; /* Change from center to flex-start */
+    }
+
+    .near-icon-part {
+        text-align: left;
+    }
+
+    .links-box {
+        align-items: flex-start;
+    }
+
+    .icon-part {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .socials-block {
+        align-items: flex-start; /* Add this to align icons */
+    }
 }
